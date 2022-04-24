@@ -6,8 +6,8 @@ const cors = require('./cors');
 const partnerRouter = express.Router();
 
 partnerRouter.route('/')
-.options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
-.get(cors.cors, (req, res, next) => {
+    .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+    .get(cors.cors, (req, res, next) => {
         Partner.find()
             .then(partners => {
                 res.statusCode = 200;
@@ -41,7 +41,7 @@ partnerRouter.route('/')
     });
 
 partnerRouter.route('/:partnerId')
-.options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+    .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
     .get(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
         Partner.findById(req.params.partnerId)
             .then(partner => {

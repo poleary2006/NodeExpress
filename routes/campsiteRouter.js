@@ -6,8 +6,8 @@ const cors = require('./cors');
 const campsiteRouter = express.Router();
 
 campsiteRouter.route('/')
-.options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
-.get(cors.cors, (req, res, next) => {
+    .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+    .get(cors.cors, (req, res, next) => {
         Campsite.find()
             .populate('comments.author')
             .then(campsites => {
@@ -42,8 +42,8 @@ campsiteRouter.route('/')
     });
 
 campsiteRouter.route('/:campsiteId')
-.options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
-.get(cors.cors, (req, res, next) => {
+    .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+    .get(cors.cors, (req, res, next) => {
         Campsite.findById(req.params.campsiteId)
             .populate('comments.author')
             .then(campsite => {
@@ -79,8 +79,8 @@ campsiteRouter.route('/:campsiteId')
     });
 
 campsiteRouter.route('/:campsiteId/comments')
-.options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
-.get(cors.cors, (req, res, next) => {
+    .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+    .get(cors.cors, (req, res, next) => {
         Campsite.findById(req.params.campsiteId)
             .populate('comments.author')
             .then(campsite => {
@@ -145,8 +145,8 @@ campsiteRouter.route('/:campsiteId/comments')
     });
 
 campsiteRouter.route('/:campsiteId/comments/:commentId')
-.options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
-.get(cors.cors, (req, res, next) => {
+    .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+    .get(cors.cors, (req, res, next) => {
         Campsite.findById(req.params.campsiteId)
             .populate('comments.author')
             .then(campsite => {
@@ -187,7 +187,7 @@ campsiteRouter.route('/:campsiteId/comments/:commentId')
                                 res.setHeader('Content-Type', 'application/json');
                                 res.json(campsite);
                             })
-                        .catch(err => next(err));
+                            .catch(err => next(err));
                     } else {
                         err = new Error(`You do not have authorization to update this comment`);
                         err.status = 403;
